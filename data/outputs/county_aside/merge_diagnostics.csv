@@ -1,0 +1,5 @@
+covariate,rows_available,counties_available,states_available
+median_household_income_usd,9024,752,51
+family_poverty_rate_pct,9024,752,51
+unemployment_rate_pct,9024,752,51
+economic_vulnerability_z,9024,752,51

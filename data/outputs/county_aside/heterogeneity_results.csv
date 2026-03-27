@@ -1,0 +1,6 @@
+model,term,coef,stderr,pval,nobs
+baseline_county_fe,Policy_DiD,-0.02006301333521946,0.011963992619032535,0.09355232640400277,9036
+heterogeneity_median_household_income_usd,Policy_DiD:median_household_income_usd_z,0.0016764304952111607,0.010319996424096105,0.8709555375421365,9024
+heterogeneity_family_poverty_rate_pct,Policy_DiD:family_poverty_rate_pct_z,-0.000527027867313035,0.01254643853212962,0.9664937771327519,9024
+heterogeneity_unemployment_rate_pct,Policy_DiD:unemployment_rate_pct_z,0.0011641849844144358,0.013064082856966194,0.9289917793965927,9024
+heterogeneity_economic_vulnerability_z,Policy_DiD:economic_vulnerability_z,-0.0006003543218100985,0.011641153774764759,0.9588699535921219,9024
