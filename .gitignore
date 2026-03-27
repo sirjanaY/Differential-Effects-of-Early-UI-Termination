@@ -27,3 +27,15 @@ twfe_panel_data.csv
 
 # Ignore local-only research notes
 .private/
+
+# Generated robustness/county outputs (reproducible from scripts)
+data/outputs/holzer_style_robustness/
+data/outputs/county_aside/
+data/outputs/main_robustness_suite/
+
+# Local HDPulse pulls and derived county covariates
+data/raw/hdpulse/
+data/processed/county_hdpulse_covariates_2019_2023.csv
+
+# Local notebook execution artifact
+notebooks/county_hdpulse_covariates.ipynb
