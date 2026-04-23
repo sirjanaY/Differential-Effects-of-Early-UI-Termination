@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Benefit Exit Lab</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="masthead">
+        <div>
+          <p class="kicker">Benefit Exit Lab</p>
+          <h1>Build a worker profile and watch the comparison update.</h1>
+        </div>
+        <p class="masthead-copy">
+          This deployment is about customizing the cohort, not staring at one fixed estimate.
+          Shape the worker profile, choose the policy frame, and the evidence board recomposes live.
+        </p>
+      </header>
+
+      <main class="lab-layout">
+        <section class="builder">
+          <div class="builder-head">
+            <p class="section-label">Profile builder</p>
+            <h2>Choose the cohort characteristics.</h2>
+          </div>
+
+          <div class="control-cluster">
+            <label>
+              Wage tier
+              <select id="wageTier"></select>
+            </label>
+            <label>
+              Age band
+              <select id="ageBand"></select>
+            </label>
+            <label>
+              Sex
+              <select id="sex"></select>
+            </label>
+            <label>
+              Education
+              <select id="educationBand"></select>
+            </label>
+            <label>
+              Race / ethnicity
+              <select id="raceBand"></select>
+            </label>
+          </div>
+
+          <div class="builder-head top-gap">
+            <p class="section-label">Policy frame</p>
+            <h2>Choose the design assumptions.</h2>
+          </div>
+
+          <div class="control-cluster policy-cluster">
+            <label>
+              Treatment set
+              <select id="treatmentMode"></select>
+            </label>
+            <label>
+              Employment definition
+              <select id="employmentMode"></select>
+            </label>
+            <label>
+              Study slice
+              <select id="sample"></select>
+            </label>
+          </div>
+
+          <div class="prompt-block">
+            <p class="section-label">Live prompt</p>
+            <p id="profilePrompt" class="prompt-copy"></p>
+          </div>
+        </section>
+
+        <section class="stage">
+          <section class="spotlight">
+            <div class="spotlight-copy">
+              <p class="section-label">Current scenario</p>
+              <h2 id="scenarioTitle"></h2>
+              <p id="scenarioSummary" class="scenario-summary"></p>
+            </div>
+            <div class="spotlight-stats" id="spotlightStats"></div>
+          </section>
+
+          <section class="board">
+            <article class="panel panel-primary">
+              <div class="panel-head">
+                <div>
+                  <p class="section-label">Main interaction</p>
+                  <h3>Profile response over 2021</h3>
+                </div>
+                <p class="panel-copy">
+                  This is the presentation anchor. Change one characteristic and let the monthly
+                  path move in front of the audience.
+                </p>
+              </div>
+              <div id="monthlyChart" class="chart-slot"></div>
+            </article>
+
+            <article class="panel">
+              <div class="panel-head">
+                <div>
+                  <p class="section-label">Structural contrast</p>
+                  <h3>Pre/post treated-control blocks</h3>
+                </div>
+              </div>
+              <div id="contrastChart" class="chart-slot compact"></div>
+            </article>
+
+            <article class="panel">
+              <div class="panel-head">
+                <div>
+                  <p class="section-label">Profile footprint</p>
+                  <h3>Where this cohort sits</h3>
+                </div>
+              </div>
+              <div id="footprintChart" class="chart-slot compact"></div>
+            </article>
+
+            <article class="panel panel-wide">
+              <div class="panel-head">
+                <div>
+                  <p class="section-label">Study benchmark</p>
+                  <h3>Saved event path under the selected wage tier</h3>
+                </div>
+                <p class="panel-copy">
+                  Keep the benchmark below the interaction layer. It supports the sandbox instead of
+                  dominating it.
+                </p>
+              </div>
+              <div id="eventChart" class="chart-slot"></div>
+            </article>
+          </section>
+        </section>
+      </main>
+    </div>
+
+    <script src="./app.js" type="module"></script>
+  </body>
+</html>
