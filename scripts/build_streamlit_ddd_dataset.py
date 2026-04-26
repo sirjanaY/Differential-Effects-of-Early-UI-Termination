@@ -7,7 +7,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-OUT_DIR = ROOT / "data" / "outputs" / "streamlit"
+OUT_DIR = ROOT / "web" / "data"
 
 DDD_GRID = ROOT / "data" / "outputs" / "holzer_style_robustness" / "ddd_robustness_grid.csv"
 STATE_SUBGROUP_DD = ROOT / "data" / "outputs" / "holzer_style_robustness" / "subgroup_did_summary.csv"
