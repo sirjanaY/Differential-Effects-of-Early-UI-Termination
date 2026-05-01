@@ -1,3 +1,4 @@
+![](UTA-DataScience-Logo.png)
 # Differential Effects of Early UI Termination
 ## A Triple-Difference Causal Analysis on Low-Wage vs. High-Wage Workers
 
@@ -18,7 +19,9 @@ Low-wage workers in food service, retail, and other vulnerable industries face s
 **This project formally tests that hypothesis using individual-level causal inference methods.** No prior analysis had formally tested whether the policy's effect differed between low-wage and higher-wage workers. We fill that gap.
 
 ---
-![est_policy_workerGroup](est_policy_workerGroup.jpg)
+![](UTA-DataScience-Logo.png)
+
+![](est_policy_workerGroup.png)
 
 ## Project Overview
 
