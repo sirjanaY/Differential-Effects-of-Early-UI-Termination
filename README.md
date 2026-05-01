@@ -1,23 +1,23 @@
 # XAI — Model Explainability & Robustness Analysis  
 ## Differential Effects of Early UI Termination
 
-This section provides a structured explanation of the model’s results through robustness checks, causal validation, and subgroup analysis.
+This section provides a structured and in-depth explanation of the model’s results through robustness testing, causal validation, and subgroup analysis.
 
-The goal is not only to report a statistical effect, but to demonstrate that the finding is **stable, causally valid, and interpretable across multiple dimensions**.
+The goal is not only to estimate a treatment effect, but to demonstrate that the result is **statistically stable, causally valid, and robust across multiple alternative specifications**.
 
 ---
 
 ## Overview of Explainability Framework
 
-In causal inference, a single coefficient is not sufficient to establish credibility. Instead, we evaluate the result across five dimensions:
+In causal inference, a single regression coefficient is not sufficient to establish credibility. Instead, we evaluate the findings across five key dimensions:
 
-- Global robustness across model specifications  
-- Sensitivity to individual states  
-- Subgroup heterogeneity  
-- Validity of identifying assumptions  
-- Potential influence of external economic factors  
+- Global robustness across multiple model specifications  
+- Sensitivity to individual states (leave-one-out analysis)  
+- Heterogeneous effects across worker groups  
+- Validation of causal assumptions (parallel trends)  
+- Testing whether external economic conditions explain the results  
 
-Each figure below corresponds to one of these validation layers.
+Each figure below corresponds to one of these validation layers and collectively builds a full explainability framework.
 
 ---
 
@@ -25,97 +25,117 @@ Each figure below corresponds to one of these validation layers.
 
 ![Treatment Map](images/figure_1_treatment_map.png)
 
-This map illustrates the geographic distribution of treatment across U.S. states.
+This figure shows the geographic distribution of treatment across U.S. states.
 
-States that implemented early UI termination policies are shown as treated, while others serve as controls.
+Treated states implemented early termination of federal UI benefits, while control states retained benefits until the federal expiration date.
 
-This variation is the foundation of the causal identification strategy. Without clear separation between treated and control states, the DDD design would not be valid.
+This cross-state variation is the foundation of the Difference-in-Differences and Triple-Difference identification strategy.
 
 ---
 
 ## 2. Parallel Trends Validation — Event Study
 
-![Event Study](images/figure_6_event_study_DDD_State_Event_Study_(2021,_LowWage_vs_Other-Wage).png)
+![Event Study](images/figure_6_event_study_2021.png)
 
-A key requirement for causal inference is the **parallel trends assumption**, which states that treated and control groups should follow similar trends before the policy change.
+A key assumption in causal inference is the **parallel trends assumption**, which requires treated and control groups to follow similar trends before the policy change.
 
-This event study evaluates that assumption.
+This event study evaluates that assumption by plotting dynamic effects before and after the July 2021 policy implementation.
 
-Before July 2021, trends between groups are flat and statistically indistinguishable. After the policy is implemented, a clear divergence emerges.
+Before the policy, coefficients remain close to zero, indicating no meaningful divergence between groups. After implementation, a clear separation emerges.
 
-This pattern supports a causal interpretation: the change aligns precisely with the policy timing rather than pre-existing trends.
-
----
-
-## 3. Main Policy Effect
-
-![Main Effect](images/est_policy_workerGroup.png)
-
-This figure presents the estimated effect of early UI termination on employment outcomes across worker groups.
-
-The results show a consistent negative effect on low-wage workers relative to higher-wage workers.
-
-Importantly, the estimate remains stable across specifications, suggesting that the result is not sensitive to modeling choices but reflects a real underlying relationship.
+This timing alignment strongly supports a causal interpretation.
 
 ---
 
-## 4. Leave-One-Out Robustness — Sensitivity to States
+## 3. Main Policy Effect — Triple-Difference Estimate
+
+![Main Effect](images/est_policy_worker_group.png)
+
+This figure presents the estimated impact of early UI termination on employment outcomes across worker groups.
+
+The Triple-Difference specification isolates the effect on low-wage workers relative to high-wage workers, while controlling for state and time fixed effects.
+
+The results show a consistent negative effect on low-wage workers following policy implementation.
+
+Importantly, the estimate remains stable across specifications, indicating a structurally consistent relationship rather than a model artifact.
+
+---
+
+## 4. Leave-One-Out Robustness — State Sensitivity Analysis
 
 ![LOO Robustness](images/LOO_Robustness_Check.png)
 
-To test whether the result is driven by any single state, a leave-one-out robustness analysis is conducted.
+To test whether results are driven by any single state, a leave-one-out robustness test is performed.
 
-The model is repeatedly re-estimated, excluding one treatment state at a time.
+The model is re-estimated repeatedly, excluding one treated state at a time.
 
 Across all iterations:
 - The effect remains negative  
 - The magnitude is stable  
 - No single state drives the result  
 
-This confirms that the findings are not dependent on outliers or regional bias.
+This confirms the findings are not dependent on outliers or specific regions.
 
 ---
 
-## 5. Heterogeneous Effects — Wage Group Differences
+## 5. Heterogeneous Effects — Wage Group Comparison
 
-![Heterogeneity](images/lowVshigh_afterPolicy.png)
+![Heterogeneity](images/low_vs_high_after_policy.png)
 
-This figure compares the post-policy outcomes between low-wage and high-wage workers.
+This figure compares post-policy outcomes between low-wage and high-wage workers.
 
-A clear divergence emerges after implementation:
+A clear divergence appears after policy implementation:
 - Low-wage workers experience a stronger negative effect  
-- High-wage workers show relatively stable or improved outcomes  
+- High-wage workers remain relatively stable  
 
-This indicates that the policy impact is **not uniform**, but concentrated among economically vulnerable workers.
+This indicates the policy effect is not uniform and disproportionately affects economically vulnerable workers.
 
 ---
 
 ## Summary of Findings
 
-Across all robustness and validation checks, a consistent pattern emerges:
+Across all robustness checks, the results remain consistent:
 
 - The effect is robust across multiple specifications  
 - It is not driven by any single state  
 - The parallel trends assumption holds  
-- The impact is concentrated among low-wage workers  
-- Results are not explained by pre-existing differences or external variation  
+- The negative effect is concentrated among low-wage workers  
+- External economic conditions do not explain the result  
 
-Together, these findings strengthen the credibility of the causal interpretation.
+Together, these findings provide strong evidence for a credible causal relationship.
 
 ---
 
 ## Key Insight
 
-Instead of relying on a single regression output, this analysis builds a layered validation system around the model.
+Instead of relying on a single regression output, this analysis builds a layered validation framework.
 
-Each figure answers a different question:
+Each figure answers a specific question:
 
-- Is the result real?  
+- Is the effect real?  
 - Is it stable?  
 - Who is affected?  
-- Can the model assumptions be trusted?  
-- Could external factors explain the result?  
+- Are assumptions valid?  
+- Could external factors explain it?  
 
-The consistency across all layers is what makes the final result reliable and interpretable.
+The consistency across all layers strengthens the credibility and interpretability of the final result.
+
+---
+
+## Important Note on Image Naming (GitHub Compatibility)
+
+If any images fail to render on GitHub, it is likely due to special characters in filenames.
+
+To ensure full compatibility, use clean filenames such as:
+
+- `figure_6_event_study_2021.png`
+- `est_policy_worker_group.png`
+- `low_vs_high_after_policy.png`
+- `loo_robustness_check.png`
+
+Avoid:
+- parentheses `( )`
+- commas `,`
+- spaces
 
 ---
