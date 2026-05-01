@@ -18,7 +18,7 @@ Low-wage workers in food service, retail, and other vulnerable industries face s
 **This project formally tests that hypothesis using individual-level causal inference methods.** No prior analysis had formally tested whether the policy's effect differed between low-wage and higher-wage workers. We fill that gap.
 
 ---
-![est_policy_workerGroup](est_policy_workerGroup.img)
+![est_policy_workerGroup](est_policy_workerGroup.jpg)
 
 ## Project Overview
 
