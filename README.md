@@ -204,21 +204,7 @@ No hyperparameter tuning was required — the DDD is a fixed identification stra
 
 ### Robustness Suite — `results/main_claim_robustness_suite.py`
 
-![Triple Difference Forest Plot](triple_difference_forest.png)
-
-| Specification | Coefficient | p-value | Status |
-|---|---|---|---|
-| Adjacent transition filter | −0.075 | 0.054 | ✓ Borderline |
-| State-specific post timing | −0.049 | 0.013 | ✓✓ Significant |
-| Holzer June vs. maintainers | −0.080 | 0.044 | ✓✓ Significant |
-| Stacked cohort proxy | −0.023 | 0.806 | ⚠ Null — method ill-suited to near-simultaneous adoption |
-| State linear trends | −0.051 | 0.016 | ✓✓ Significant |
-| Industry proxy (main def.) | −0.049 | 0.013 | ✓✓ Significant |
-| Industry proxy alt | −0.020 | 0.336 | ⚠ Definition-sensitive boundary |
-| Randomization inference | −0.049 | RI p=0.653 | ⚠ Underpowered at 24 states |
-| Placebo 2018 | +0.023 | 0.686 | ✓ Null as expected |
-| Placebo 2019 | +0.049 | 0.385 | ✓ Null as expected |
-| Placebo fake May 2021 | +0.026 | 0.526 | ✓ Null as expected |
+![](triple_difference_forest.png)
 
 **9 of 12 specifications negative. 6 statistically significant. Zero significant results in the opposite direction.**
 
@@ -298,14 +284,13 @@ The policy widened the recovery gap. Reducing income support did not override th
 
 ### 1. Clone the repository
 ```bash
-git clone https://github.com/Jomgus/Capstone.git
+git clone https://github.com/sirjanaY/DataCapstone
 cd Capstone
 ```
 
 ### 2. Set up environment
 ```bash
 python3 -m venv .venv
-source .venv/bin/activate        # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
@@ -328,87 +313,50 @@ python3 results/slice_ddd_corrected.py
 python3 results/county_aside_heterogeneity.py
 ```
 
-### 7. Build Streamlit app data
-```bash
-python3 results/build_streamlit_ddd_dataset.py
-python3 results/build_policy_demo_bundle.py
-```
-
-### 8. Launch the interactive policy explorer
-```bash
-cd results
-streamlit run app.js
-```
-
----
-
 ## Repository Structure
 
 ```
 Capstone/
 │
-├── README.md                          ← This file
-├── requirements.txt                   ← Python dependencies
-├── UTA-DataScience-Logo.png           ← Repo header image
+├── README.md                          This file
+├── requirements.txt                    Python dependencies
+├── UTA-DataScience-Logo.png            Repo header image
 │
-├── models/                            ← PRIMARY ANALYSIS NOTEBOOKS
-│   ├── SignificanceHolzerStyle.ipynb  ← MAIN: DDD model, placebo, LOO
-│   └── baseline_model.ipynb           ← Baseline TWFE on aggregate data
+├── models/                             PRIMARY ANALYSIS NOTEBOOKS
+│   ├── SignificanceHolzerStyle.ipynb   MAIN: DDD model, placebo, LOO
+│   └── baseline_model.ipynb            Baseline TWFE on aggregate data
 │
-├── notebooks/                         ← SUPPORTING & EXPLORATORY NOTEBOOKS
-│   ├── archives/                      ← Exploratory history (not active analysis)
-│   ├── EDA.ipynb                      ← Exploratory data analysis
-│   ├── ddd_forest_plot.ipynb          ← Global explainability forest plot
-│   ├── path analysis.ipynb            ← Causal path analysis
-│   ├── finding policy.ipynb           ← Policy milestone identification
-│   ├── prepare_panel_for_twfe.py      ← County-level panel construction
-│   ├── SignificanceHolzerStyle.ipynb  ← (working copy)
-│   ├── FirstValidTimeFrame.ipynb      ← Exploratory
-│   ├── Significant.ipynb              ← Exploratory
-│   └── baseline_model.ipynb           ← (working copy)
+├── notebooks/                          SUPPORTING & EXPLORATORY NOTEBOOKS
+│   ├── archives/                       Exploratory history (not active analysis)
+│   ├── EDA.ipynb                       Exploratory data analysis
+│   ├── ddd_forest_plot.ipynb           Global explainability forest plot
+│   ├── path analysis.ipynb             Causal path analysis
+│   ├── finding policy.ipynb            Policy milestone identification
+│   ├── prepare_panel_for_twfe.py       County-level panel construction
+│   ├── SignificanceHolzerStyle.ipynb   
+│   ├── FirstValidTimeFrame.ipynb       Exploratory
+│   ├── Significant.ipynb               Exploratory
+│   └── baseline_model.ipynb           
 │
-├── results/                           ← SCRIPTS + STREAMLIT APP
-│   ├── main_claim_robustness_suite.py ← All 12 robustness specifications
-│   ├── holzer_style_robustness.py     ← Holzer et al. comparison specs
-│   ├── slice_ddd_corrected.py         ← Subgroup DDD slices
-│   ├── county_aside_heterogeneity.py  ← County-level moderation tests
-│   ├── build_streamlit_ddd_dataset.py ← Builds ddd_inter.json
-│   ├── build_policy_demo_bundle.py    ← Builds policy_demo_bundle.json
-│   ├── extract_saved_results.py       ← Exports notebook outputs to Markdown
-│   ├── ddd_inter.json                 ← Pre-computed DDD results for app
-│   ├── policy_demo_bundle.json        ← Pre-computed bundle for app
-│   ├── app.js                         ← Interactive policy explorer
-│   ├── index.html                     ← App entry point
-│   └── styles.css                     ← App styling
-│
-├── images/                            ← ALL FIGURES AND VISUALIZATIONS
-│   ├── LOO_Robustness_Check.png
-│   ├── ddd_state_event_study_2018_lowwage_vs_other-wage.png
-│   ├── ddd_state_event_study_2021_lowwage_vs_other-wage.png
-│   ├── figure_1_treatment_map.svg
-│   ├── figure_1_trends_poster.svg
-│   ├── figure_2_methodology_flowchart.svg
-│   ├── figure_4_ddd_vs_placebo.svg
-│   ├── figure_4_the_gap.svg
-│   ├── figure_6_event_study_DDD State Event Study (2018).svg
-│   └── figure_6_event_study_DDD State Event Study (2021).svg
-│
-├── data/
-│   ├── raw/                           ← Raw inputs: CPS, policy, COVID, OxCGRT
-│   ├── processed/                     ← Processed state-level panel files
-│   └── outputs/                       ← Generated research outputs
-│
-│ (root-level figures referenced in README)
-├── LOO_Robustness_Check.png
-├── est_policy_workerGroup.png
-├── figure_1_treatment_map.png
-├── figure_4_ddd_vs_placebo.jpeg
-├── figure_6_event_study_DDD.jpeg
-├── lowVshigh_afterPolicy.jpg
-└── triple_difference_forest.png
-```
+├── results/                            SCRIPTS
+│   ├── main_claim_robustness_suite.py  All 12 robustness specifications
+│   ├── holzer_style_robustness.py      Holzer et al. comparison specs
+│   ├── slice_ddd_corrected.py          Subgroup DDD slices
+│   ├── county_aside_heterogeneity.py   County-level moderation tests
+│   ├── build_streamlit_ddd_dataset.py  Builds ddd_inter.json
+│   ├── build_policy_demo_bundle.py     Builds policy_demo_bundle.json
+│   ├── extract_saved_results.py        Exports notebook outputs to Markdown
+│   ├── ddd_inter.json                  Pre-computed DDD results for app
 
----
+│
+├── images/                             ALL FIGURES AND VISUALIZATIONS
+
+├── data/
+│   ├── raw/                            Raw inputs: CPS, policy, COVID, OxCGRT
+│   ├── processed/                      Processed state-level panel files
+│   └── outputs/                        Generated research outputs
+│
+```
 
 ## Requirements
 
@@ -434,9 +382,9 @@ pip install -r requirements.txt
 
 | Name | Role | Contact |
 |---|---|---|
-| Josue Gonzalez | Lead Analyst — causal modeling, robustness suite | josue.gonzalez@mavs.uta.edu |
-| Cynthia Mireles | Data Engineer — CPS preprocessing, panel construction | cynthia.mireles@mavs.uta.edu |
-| Sirjana Yadav | Model Interpretation & Visualization — XAI, app | sirjana.yadav@mavs.uta.edu |
+| Josue Gonzalez | jng6114@mavs.uta.edu@mavs.uta.edu |
+| Cynthia Mireles | cxm2470@mavs.uta.edu |
+| Sirjana Yadav  | sxy8945@mavs.uta.edu |
 
 *DATA 4382: Data Capstone Project 2 · University of Texas at Arlington · Spring 2026*
 
