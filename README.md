@@ -6,7 +6,6 @@
 **Josue Gonzalez · Cynthia Mireles · Sirjana Yadav**
 
 *Department of Data Science, University of Texas at Arlington - DATA 4382: Data Capstone Project 2*
-*Supervisor: Dr. Masoud Rostami · Spring 2026*
 
 ---
 ## Problem Definition
