@@ -11,9 +11,9 @@
 ## Problem Definition
 
 In July 2021, 26 U.S. states terminated federal pandemic Unemployment Insurance (UI) benefits months ahead of the national September expiration. The stated rationale was simple: removing the financial safety net would push unemployed workers back into the labor market faster.
+**But the evidence tells a different story at least for the workers who needed help most.**
 
-But the evidence tells a different story at least for the workers who needed help most.
-Low-wage workers in food service, retail, and other vulnerable industries face structural barriers that go far beyond financial disincentives: lack of childcare, limited transportation, persistent health concerns, and localized demand shocks. If policymakers cut benefits without accounting for these barriers, the most vulnerable group could be harmed rather than helped.
+Low-wage workers face structural barriers that go far beyond financial disincentives, if policymakers cut benefits without accounting for these barriers, the most vulnerable group could be harmed rather than helped.
 
 **This project formally tests that hypothesis using individual-level causal inference methods.** No prior analysis had formally tested whether the policy's effect differed between low-wage and higher-wage workers. We fill that gap.
 ___
@@ -179,14 +179,8 @@ No hyperparameter tuning was required — the DDD is a fixed identification stra
 
 ### Subgroup DDD Slices
 
-| Subgroup | Specification | Coefficient | p-value | n |
-|---|---|---|---|---|
-| All ages | State-specific corrected | −0.049 | 0.013 | 13,443 |
-| Prime age (26–54) | State-specific corrected | **−0.070** | **0.002** | 7,673 |
-| No college degree | State-specific corrected | −0.052 | 0.022 | 10,076 |
-| **Prime age + no college** | State-specific corrected | **−0.083** | **0.005** | 5,611 |
-| Young (18–24) | State-specific corrected | −0.025 | 0.267 | 2,370 |
-| Older (55+) | State-specific corrected | −0.001 | 0.977 | 2,913 |
+<img src="images/compare.png" width="500">
+
 
 ### Robustness 
 
@@ -195,7 +189,6 @@ The findings are robust, with zero evidence of a significant positive effect in 
 
 ### DDD Event Study
 <img src="images/figure_6_event_study_DDD.jpeg" width="500">
-
 
 Event study plots for 2018 and 2021 validating the parallel trends assumption. Pre-treatment coefficients cluster near zero (p > 0.10), confirming groups were trending in parallel before the policy.
 
@@ -220,7 +213,6 @@ The forest plot visualizes all 12 robustness specifications simultaneously with 
 **Script:** `results/county_aside_heterogeneity.py`
 
 County income, poverty rate, and unemployment rate do not significantly moderate the main policy effect (all interaction p-values > 0.87). The harm to low-wage workers was broadly distributed regardless of local economic conditions — the effect is about the policy, not local context.
-
 ---
 ### Leave-One-Out (LOO) Robustness
 **Output:** `images/LOO_Robustness_Check.png` 
@@ -247,11 +239,7 @@ The DDD model was re-estimated 24 times, removing one treatment state at a time.
 
 The early termination of federal UI benefits in 2021 acted as a blunt instrument that failed to spur relative employment gains for the most vulnerable segment of the workforce. The Triple-Difference estimate of −0.0804 (p = 0.035) confirms a statistically significant negative differential effect.
 
-
-<img src="images/compare.png" width="500">
-
 The policy widened the recovery gap. Reducing income support did not override the structural barriers low-wage workers face.
-
 ---
 ## Future Work
 
@@ -259,7 +247,6 @@ The policy widened the recovery gap. Reducing income support did not override th
 - **Longer time horizon** — track employment outcomes through December 2021 for medium-term recovery analysis
 - **Variable dictionary** — add a codebook documenting every variable transformation and treatment definition
 - **Export final tables** — generate stable LaTeX/Markdown output tables from the preferred specification into `data/outputs/`
-
 ---
 ## How to Run
 
