@@ -226,11 +226,11 @@ The DDD model was re-estimated 24 times, removing one treatment state at a time.
 **What worked best and why ?**
 
 - The Triple-Difference design on individual-level CPS microdata outperformed the aggregate TWFE baseline in both statistical power and interpretive clarity
-- State-specific timing — using each state's actual termination date rather than a blanket July indicator — produced the sharpest estimates
+- State-specific timing using each state's actual termination date rather than a blanket July indicator, produced the sharpest estimates
 - The subgroup analysis revealed the most policy-relevant finding: prime-age workers without degrees, the exact demographic the policy intended to help, were harmed most
 
 **Practical and policy impact:**
-- Cutting benefits did not push low-wage workers back to work. The structural barriers they face — childcare, transportation, localized demand shocks, health concerns — are not overcome by removing financial support
+- Cutting benefits did not push low-wage workers back to work. The structural barriers they face childcare, transportation, localized demand shocks, health concerns are not overcome by removing financial support
 - Future unemployment policy must be **targeted by wage group and structural context**, not applied as a blanket measure
 - The evidence is strong enough to inform legislative testimony and state labor department recommendations
 
@@ -243,10 +243,10 @@ The policy widened the recovery gap. Reducing income support did not override th
 ---
 ## Future Work
 
-- **Causal Forest** — estimate Conditional Average Treatment Effects (CATE) at the individual level to profile which workers were most harmed
-- **Longer time horizon** — track employment outcomes through December 2021 for medium-term recovery analysis
-- **Variable dictionary** — add a codebook documenting every variable transformation and treatment definition
-- **Export final tables** — generate stable LaTeX/Markdown output tables from the preferred specification into `data/outputs/`
+- **Causal Forest** - estimate Conditional Average Treatment Effects (CATE) at the individual level to profile which workers were most harmed
+- **Longer time horizon** - track employment outcomes through December 2021 for medium-term recovery analysis
+- **Variable dictionary** - add a codebook documenting every variable transformation and treatment definition
+- **Export final tables** - generate stable LaTeX/Markdown output tables from the preferred specification into `data/outputs/`
 ---
 ## How to Run
 
@@ -268,7 +268,7 @@ Download `cps_00006.csv` from [IPUMS CPS](https://cps.ipums.org/cps/) and place 
 python3 notebooks/prepare_panel_for_twfe.py
 ```
 ### 5. Run the main DDD analysis
-Open and run `models/SignificanceHolzerStyle.ipynb` — this is the primary analysis notebook containing the main DDD model, placebo tests, and LOO robustness checks.
+Open and run `models/SignificanceHolzerStyle.ipynb` - this is the primary analysis notebook containing the main DDD model, placebo tests, and LOO robustness checks.
 
 ### 6. Run the robustness suite
 ```bash
