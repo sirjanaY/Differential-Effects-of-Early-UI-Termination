@@ -165,9 +165,8 @@ found_job ~ TreatState × Post × LowWage + C(STATEFIP) + C(MONTH)
 | **Primary notebook** | `notebooks/SignificanceHolzerStyle.ipynb` |
 
 No hyperparameter tuning required — the DDD is a fixed identification strategy, not a predictive model.
-
 ## Results
-
+___
 ### Main DDD Result
 
 | Term | Coefficient | p-value | Interpretation |
@@ -239,11 +238,8 @@ County income, poverty, and unemployment do not significantly moderate the main 
 - Cutting benefits did not push low-wage workers back to work. The structural barriers they face — childcare, transportation, localized demand, health concerns — are not overcome by removing financial support
 - Future unemployment policy must be **targeted by wage group and structural context**, not applied as a blanket measure
 - The evidence is strong enough to inform legislative testimony and state labor department recommendations
-
----
-
+--
 ## Conclusion
-
 The early termination of federal UI benefits in 2021 acted as a blunt instrument that failed to spur relative employment gains for the most vulnerable segment of the workforce. The Triple-Difference estimate of −0.0804 (p = 0.035) confirms a statistically significant negative differential effect.
 
 This finding is:
@@ -260,8 +256,6 @@ The policy widened the recovery gap. Reducing income support did not override th
 
 - **Causal Forest** — estimate Conditional Average Treatment Effects (CATE) at the individual level to profile which workers were most harmed
 - **Longer time horizon** — track employment outcomes through December 2021 for medium-term recovery analysis
-- **Normalize file paths** — move all notebook references from `~/Downloads/` to repo-relative paths
-- **Pin package versions** — lock `requirements.txt` once the final notebook path is frozen
 - **Variable dictionary** — add a codebook documenting every variable transformation and treatment definition
 - **Export final tables** — generate stable LaTeX/Markdown output tables from the preferred specification into `data/outputs/`
 
@@ -312,82 +306,6 @@ python3 scripts/build_policy_demo_bundle.py
 cd web
 streamlit run app.py
 ```
-
-### 9. Generate stable results snapshot
-```bash
-python3 scripts/extract_saved_results.py --output data/outputs/research_snapshot.md
-```
-
----
-
-## Repository Structure
-
-```
-Capstone/
-│
-├── README.md                               ← This file
-├── requirements.txt                        ← Python dependencies
-├── prepare_panel_for_twfe.py               ← County-level panel construction
-├── baseline_model.ipynb                    ← Baseline TWFE on aggregate data
-├── .gitignore
-│
-├── notebooks/                              ← PRIMARY ANALYSIS
-│   ├── SignificanceHolzerStyle.ipynb       ← MAIN: DDD model, placebo, LOO
-│   ├── ddd_forest_plot.ipynb               ← Global explainability forest plot
-│   ├── EDA.ipynb                           ← Exploratory data analysis
-│   ├── finding policy.ipynb                ← Policy milestone identification
-│   ├── path_analysis.ipynb                 ← Causal path analysis
-│   ├── LOO_Robustness_Check.png            ← Leave-one-out output figure
-│   ├── figure_1_treatment_map.svg          ← Treatment vs. control states map
-│   ├── figure_1_trends_poster.svg          ← Employment trends by wage group
-│   ├── figure_2_methodology_flowchart.svg  ← 5-step methodology pipeline
-│   ├── figure_4_ddd_vs_placebo.svg         ← DDD result vs. 2018 placebo
-│   ├── figure_4_the_gap.svg                ← Recovery gap bar chart
-│   ├── figure_6_event_study_DDD_State_2018_low.svg  ← 2018 parallel trends
-│   └── figure_6_event_study_DDD_State_2021_low.svg  ← 2021 event study
-│
-├── scripts/                                ← ANALYSIS SCRIPTS
-│   ├── main_claim_robustness_suite.py      ← All 12 robustness specifications
-│   ├── holzer_style_robustness.py          ← Holzer et al. comparison specs
-│   ├── slice_ddd_corrected.py              ← Subgroup DDD slices
-│   ├── county_aside_heterogeneity.py       ← County-level moderation tests
-│   ├── build_streamlit_ddd_dataset.py      ← Builds ddd_inter.json for app
-│   ├── build_policy_demo_bundle.py         ← Builds policy_demo_bundle.json
-│   └── extract_saved_results.py            ← Exports notebook outputs to Markdown
-│
-├── data/
-│   ├── raw/                                ← Raw inputs: CPS, policy, COVID, OxCGRT
-│   ├── processed/                          ← Processed state-level panel files
-│   └── outputs/                            ← Generated research outputs
-│       └── research_snapshot.md
-│
-├── archive/
-│   └── notebooks/                          ← Exploratory history (NOT active analysis)
-│       ├── README.md
-│       ├── BAD_BASELINE.ipynb
-│       ├── FirstValidTimeFrame.ipynb
-│       ├── Significant.ipynb
-│       ├── SignificanceHolzerStyle.ipynb
-│       ├── SignificantBADTIMEFRAME.ipynb
-│       └── Untitled-2.ipynb
-│
-├── web/                                    ← STREAMLIT APP
-│   ├── app.py                              ← Interactive policy explorer
-│   └── data/
-│       ├── ddd_inter.json                  ← Pre-computed DDD results
-│       └── policy_demo_bundle.json         ← Pre-computed bundle for app
-│
-└── xai/                                    ← EXPLAINABILITY OUTPUTS
-    ├── README.md                           ← Full XAI documentation
-    ├── forest_plot_ddd.png                 ← Global explainability forest plot
-    ├── subgroup_ddd_slices.png             ← Who was affected and how much
-    ├── loo_forest_plot.png                 ← Leave-one-out state robustness
-    ├── parallel_trends_event_study.png     ← PTA validation + placebo
-    └── county_correlation_heatmap.png      ← County economic context
-```
-
----
-
 ## Requirements
 
 ```bash
@@ -417,9 +335,7 @@ pip install -r requirements.txt
 | Sirjana Yadav | Model Interpretation & Visualization — XAI, Streamlit app | sirjana.yadav@mavs.uta.edu |
 
 *DATA 4382: Data Capstone Project 2 · University of Texas at Arlington · Spring 2026*
-
 ---
-
 ## References
 
 - Holzer, H. J., Hubbard, G., & Strain, M. (2021). Did Pandemic Unemployment Benefits Reduce Employment? Evidence from Early State-Level Expirations in June 2021. *IZA Discussion Paper No. 14927.* [SSRN](https://ssrn.com/abstract=4114431)
