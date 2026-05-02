@@ -210,9 +210,9 @@ All pre-treatment coefficients cluster near zero (p > 0.10). The divergence begi
 The forest plot visualizes all 12 robustness specifications simultaneously with 95% confidence intervals. This is the **global explainability layer** of our causal model — it shows how the policy effect behaves across the entire range of modeling choices. Every dot left of zero means the policy hurt low-wage workers relative to higher-wage workers.
 
 ### County-Level Moderation
-**Script:** `results/county_aside_heterogeneity.py`
 
-County income, poverty rate, and unemployment rate do not significantly moderate the main policy effect (all interaction p-values > 0.87). The harm to low-wage workers was broadly distributed regardless of local economic conditions — the effect is about the policy, not local context.
+Cunty income, poverty rate, and unemployment rate do not significantly moderate the main policy effect (all interaction p-values > 0.87). The harm to low-wage workers was broadly distributed regardless of local economic conditions — the effect is about the policy, not local context.
+
 ---
 ### Leave-One-Out (LOO) Robustness
 **Output:** `images/LOO_Robustness_Check.png` 
