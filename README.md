@@ -218,9 +218,10 @@ No hyperparameter tuning was required — the DDD is a fixed identification stra
 
 ## Model Interpretation (XAI / Global Explainability)
 
-### Global Explainability — DDD Forest Plot
+### Global Explainability: DDD Forest Plot
 **Notebook:** `notebooks/ddd_forest_plot.ipynb`
-<img src="images/triple_difference_forest.png" width="500">
+
+<img src="images/triple_difference_forest.png" width="700">
 
 
 The forest plot visualizes all 12 robustness specifications simultaneously with 95% confidence intervals. This is the **global explainability layer** of our causal model — it shows how the policy effect behaves across the entire range of modeling choices. Every dot left of zero means the policy hurt low-wage workers relative to higher-wage workers.
@@ -234,7 +235,8 @@ The effect is not uniform. It concentrates in prime-age (26–54) workers withou
 
 All pre-treatment coefficients cluster near zero (p > 0.10). The divergence begins exactly at the July 2021 cutoff. Three independent placebo tests — 2018, 2019, and a fake May 2021 cutoff — all return null, confirming the 2021 effect is real.
 
-<img src="images/ddd_state_event_study_2018_lowwage_vs_other-wage.png" width="500"> <img src="images/ddd_state_event_study_2021_lowwage_vs_other-wage.png" width="500">
+<img src="images/ddd_state_event_study_2018_lowwage_vs_other-wage.png" width="500">
+<img src="images/ddd_state_event_study_2021_lowwage_vs_other-wage.png" width="500">
 
 ### County-Level Moderation
 **Script:** `results/county_aside_heterogeneity.py`
