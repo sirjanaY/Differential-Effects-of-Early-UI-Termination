@@ -1,7 +1,7 @@
 ![UTA Data Science Logo](UTA-DataScience-Logo.png)
 
 # Differential Effects of Early UI Termination
-## A Triple-Difference Causal Analysis on Low-Wage vs. High-Wage Workers
+*## A Triple-Difference Causal Analysis on Low-Wage vs. High-Wage Workers*
 
 **Josue Gonzalez · Cynthia Mireles · Sirjana Yadav**
 
