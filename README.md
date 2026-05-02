@@ -139,7 +139,7 @@ Event study plots for 2018 and 2021 validating the parallel trends assumption. P
 - **Result:** Insignificant (coef = 0.003, p = 0.41)
 - **Why it failed:** Aggregate data masks individual-level heterogeneity. Non-parallel pre-trends made causal identification impossible at this level of granularity.
 
-### Primary Model — Triple-Difference (DDD) on CPS Microdata
+### Primary Model: Triple-Difference (DDD) on CPS Microdata
 **Notebook:** `models/SignificanceHolzerStyle.ipynb`
 
 The DDD is the appropriate design for testing *heterogeneous* policy effects across subgroups. By adding a third difference (`LowWage`), we formally isolate the differential effect on our target group rather than estimating a single average treatment effect.
