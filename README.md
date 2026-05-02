@@ -374,9 +374,9 @@ pip install -r requirements.txt
 ---
 ## Team
 
-| Name | Role | Contact |
-|---|---|---|
-| Josue Gonzalez | jng6114@mavs.uta.edu@mavs.uta.edu |
+| Name | Contact |
+|---|---|
+| Josue Gonzalez | jng6114@mavs.uta.edu |
 | Cynthia Mireles | cxm2470@mavs.uta.edu |
 | Sirjana Yadav  | sxy8945@mavs.uta.edu |
 
