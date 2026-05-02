@@ -103,18 +103,18 @@ All EDA figures are in `notebooks/` as SVG files.
 US choropleth showing treatment states (orange = ended UI early) vs. control states (blue = kept benefits). 24 treatment states, 27 control states in the main specification.
 
 ###  Employment Trends Poster 
-![](lowVshigh_afterPolicy.png)
+![](lowVshigh_afterPolicy.jpg)
 
 Monthly job-finding rates (Feb–Aug 2021) for low-wage vs. higher-wage workers, split by treatment and control states. A visible divergence emerges after the July policy cutoff.
 
 ### Figure 4 — DDD vs. Placebo
-![](figure_4_ddd_vs_placebo.png)
+![](figure_4_ddd_vs_placebo.jpeg)
 
 Side-by-side comparison of the 2021 DDD result (p = 0.035, significant) vs. the 2018 placebo test (p = 0.690, null). Confirms the 2021 effect is driven by the actual policy, not pre-existing trends.
 
 
 ### Figure 6 — DDD Event Studies (`figure_6_event_study_DDD_State_*.svg`)
-![](figure_6_event_study_DDD.png)
+![](figure_6_event_study_DDD.jpeg)
 
 Event study plots for 2018 and 2021 validating the parallel trends assumption. Pre-treatment coefficients cluster near zero (p > 0.10), confirming groups were trending in parallel before the policy.
 
