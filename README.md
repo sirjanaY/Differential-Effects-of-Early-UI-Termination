@@ -199,8 +199,6 @@ No hyperparameter tuning was required — the DDD is a fixed identification stra
 
 ### Robustness 
 
-### Robustness Suite — `results/main_claim_robustness_suite.py`
-
 | Specification | Coef | p-value | |
 |---|---|---|---|
 | State-specific post timing | −0.049 | 0.013  |
@@ -209,7 +207,6 @@ No hyperparameter tuning was required — the DDD is a fixed identification stra
 | Placebo 2018 | +0.023 | 0.686 |  null |
 | Placebo 2019 | +0.049 | 0.385 |  null |
 | Placebo fake May 2021 | +0.026 | 0.526 |  null |
-
 
 
 **9 of 12 specifications negative. 6 statistically significant. Zero significant results in the opposite direction.**
@@ -224,13 +221,6 @@ No hyperparameter tuning was required — the DDD is a fixed identification stra
 ![Triple Difference Forest Plot](triple_difference_forest.png)
 
 The forest plot visualizes all 12 robustness specifications simultaneously with 95% confidence intervals. This is the **global explainability layer** of our causal model — it shows how the policy effect behaves across the entire range of modeling choices. Every dot left of zero means the policy hurt low-wage workers relative to higher-wage workers.
-
-### Leave-One-Out (LOO) Robustness
-**Output:** `LOO_Robustness_Check.png` 
-
-![LOO Robustness Check](LOO_Robustness_Check.png)
-
-The DDD model was re-estimated 24 times, removing one treatment state at a time. Coefficient range: [−0.066, −0.095]. All p-values remain below 0.05 except Montana and Florida (still below 0.10). No single state drives the result.
 
 ### Subgroup Heterogeneity
 **Script:** `results/slice_ddd_corrected.py`
@@ -248,6 +238,12 @@ All pre-treatment coefficients cluster near zero (p > 0.10). The divergence begi
 County income, poverty rate, and unemployment rate do not significantly moderate the main policy effect (all interaction p-values > 0.87). The harm to low-wage workers was broadly distributed regardless of local economic conditions — the effect is about the policy, not local context.
 
 ---
+### Leave-One-Out (LOO) Robustness
+**Output:** `LOO_Robustness_Check.png` 
+
+![LOO Robustness Check](LOO_Robustness_Check.png)
+
+The DDD model was re-estimated 24 times, removing one treatment state at a time. Coefficient range: [−0.066, −0.095]. All p-values remain below 0.05 except Montana and Florida (still below 0.10). No single state drives the result.
 
 ## Key Insights
 
