@@ -105,7 +105,8 @@ Run `notebooks/prepare_panel_for_twfe.py` to construct the county-level TWFE pan
 All figures are stored in `images/`.
 
 ### Treatment Map
-![Treatment vs Control States](figure_1_treatment_map.png)
+<img src="figure_1_treatment_map.png" width="500">
+
 
 US choropleth showing treatment states (orange = ended UI early) vs. control states (blue = kept benefits). 24 treatment states, 27 control states in the main specification.
 
