@@ -233,6 +233,7 @@ The effect is not uniform. It concentrates in prime-age (26–54) workers withou
 ### Parallel Trends Validation
 
 All pre-treatment coefficients cluster near zero (p > 0.10). The divergence begins exactly at the July 2021 cutoff. Three independent placebo tests — 2018, 2019, and a fake May 2021 cutoff — all return null, confirming the 2021 effect is real.
+
 <img src="images/ddd_state_event_study_2018_lowwage_vs_other-wage.png" width="500"> <img src="images/ddd_state_event_study_2021_lowwage_vs_other-wage.png" width="500">
 
 ### County-Level Moderation
@@ -243,6 +244,7 @@ County income, poverty rate, and unemployment rate do not significantly moderate
 ---
 ### Leave-One-Out (LOO) Robustness
 **Output:** `images/LOO_Robustness_Check.png` 
+
 <img src="images/LOO_Robustness_Check.png" width="500">
 
 The DDD model was re-estimated 24 times, removing one treatment state at a time. Coefficient range: [−0.066, −0.095]. All p-values remain below 0.05 except Montana and Florida (still below 0.10). No single state drives the result.
