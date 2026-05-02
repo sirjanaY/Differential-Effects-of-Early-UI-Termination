@@ -4,7 +4,8 @@
 ## A Triple-Difference Causal Analysis on Low-Wage vs. High-Wage Workers
 
 **Josue Gonzalez · Cynthia Mireles · Sirjana Yadav**
-*Department of Data Science, University of Texas at Arlington — DATA 4382: Data Capstone Project 2*
+
+*Department of Data Science, University of Texas at Arlington - DATA 4382: Data Capstone Project 2*
 *Supervisor: Dr. Masoud Rostami · Spring 2026*
 
 ---
@@ -42,23 +43,23 @@ ___
 - **Raw size:** ~5 million rows, 23 columns
 - **Filtered size:** 348,098 rows → 12,620 after analysis filtering
 - **Time period:** February–August 2021 (primary) · 2018–2019 (placebo validation)
-- **File:** `cps_00006.csv` — not tracked in repo due to file size (see IPUMS link above)
+- **File:** `cps_00006.csv` - not tracked in repo due to file size (see IPUMS link above)
 
 **Key features:**
 
 | Column | Description |
 |---|---|
-| `STATEFIP` | State FIPS code — used to assign treatment status |
-| `MONTH` | Survey month — pre/post policy timing |
-| `AGE` | Worker age — subgroup slicing |
+| `STATEFIP` | State FIPS code - used to assign treatment status |
+| `MONTH` | Survey month - pre/post policy timing |
+| `AGE` | Worker age - subgroup slicing |
 | `SEX` | Gender |
 | `RACE` | Race/ethnicity |
 | `EDUC` | Education level |
-| `IND` | Industry code — defines low-wage group |
+| `IND` | Industry code - defines low-wage group |
 | `OCC` | Occupation code |
-| `EMPSTAT` | Employment status — used to construct `found_job` outcome |
+| `EMPSTAT` | Employment status - used to construct `found_job` outcome |
 | `DURUNEMP` | Weeks of continuous unemployment |
-| `LNKFW1MWT` | Survey weights — applied in all regressions |
+| `LNKFW1MWT` | Survey weights - applied in all regressions |
 
 ### Secondary Dataset — County Economic Context
 - **Source:** Social, Economic, and Cultural Environment (SECE) data
@@ -143,10 +144,8 @@ The DDD is the appropriate design for testing *heterogeneous* policy effects acr
 
 **Specification:**
 ```
-found_job ~ TreatState × Post × LowWage + C(STATEFIP) + C(MONTH)
+TreatState × Post × LowWage + C(STATEFIP) + C(MONTH)
 ```
-
-Estimated via WLS using survey weights (`LNKFW1MWT`). Standard errors clustered at the state level.
 
 **Key interaction term:** `TreatState × Post × LowWage` captures the differential causal effect — how much worse (or better) low-wage workers did in treatment states after the policy, relative to higher-wage workers and relative to control states.
 
@@ -199,9 +198,20 @@ No hyperparameter tuning was required — the DDD is a fixed identification stra
 | Young (18–24) | State-specific corrected | −0.025 | 0.267 | 2,370 |
 | Older (55+) | State-specific corrected | −0.001 | 0.977 | 2,913 |
 
+### Robustness 
+
 ### Robustness Suite — `results/main_claim_robustness_suite.py`
 
-![](triple_difference_forest.png)
+| Specification | Coef | p-value | |
+|---|---|---|---|
+| State-specific post timing | −0.049 | 0.013  |
+| Holzer June vs. maintainers | −0.080 | 0.044 | 
+| State linear trends | −0.051 | 0.016 | 
+| Placebo 2018 | +0.023 | 0.686 |  null |
+| Placebo 2019 | +0.049 | 0.385 |  null |
+| Placebo fake May 2021 | +0.026 | 0.526 |  null |
+
+
 
 **9 of 12 specifications negative. 6 statistically significant. Zero significant results in the opposite direction.**
 
@@ -217,7 +227,7 @@ No hyperparameter tuning was required — the DDD is a fixed identification stra
 The forest plot visualizes all 12 robustness specifications simultaneously with 95% confidence intervals. This is the **global explainability layer** of our causal model — it shows how the policy effect behaves across the entire range of modeling choices. Every dot left of zero means the policy hurt low-wage workers relative to higher-wage workers.
 
 ### Leave-One-Out (LOO) Robustness
-**Output:** `LOO_Robustness_Check.png` · `images/LOO_Robustness_Check.png`
+**Output:** `LOO_Robustness_Check.png` 
 
 ![LOO Robustness Check](LOO_Robustness_Check.png)
 
@@ -229,7 +239,6 @@ The DDD model was re-estimated 24 times, removing one treatment state at a time.
 The effect is not uniform. It concentrates in prime-age (26–54) workers without college degrees — the exact demographic the policy was intended to motivate back to work. Young (18–24) and older (55+) workers show null results.
 
 ### Parallel Trends Validation
-**Images:** `images/ddd_state_event_study_2021_lowwage_vs_other-wage.png` · `images/ddd_state_event_study_2018_lowwage_vs_other-wage.png`
 
 All pre-treatment coefficients cluster near zero (p > 0.10). The divergence begins exactly at the July 2021 cutoff. Three independent placebo tests — 2018, 2019, and a fake May 2021 cutoff — all return null, confirming the 2021 effect is real.
 
@@ -253,7 +262,6 @@ County income, poverty rate, and unemployment rate do not significantly moderate
 - The evidence is strong enough to inform legislative testimony and state labor department recommendations
 
 ---
-
 ## Conclusion
 
 The early termination of federal UI benefits in 2021 acted as a blunt instrument that failed to spur relative employment gains for the most vulnerable segment of the workforce. The Triple-Difference estimate of −0.0804 (p = 0.035) confirms a statistically significant negative differential effect.
@@ -267,7 +275,6 @@ This finding is:
 The policy widened the recovery gap. Reducing income support did not override the structural barriers low-wage workers face.
 
 ---
-
 ## Future Work
 
 - **Causal Forest** — estimate Conditional Average Treatment Effects (CATE) at the individual level to profile which workers were most harmed
@@ -276,7 +283,6 @@ The policy widened the recovery gap. Reducing income support did not override th
 - **Export final tables** — generate stable LaTeX/Markdown output tables from the preferred specification into `data/outputs/`
 
 ---
-
 ## How to Run
 
 ### 1. Clone the repository
@@ -284,13 +290,11 @@ The policy widened the recovery gap. Reducing income support did not override th
 git clone https://github.com/sirjanaY/DataCapstone
 cd Capstone
 ```
-
 ### 2. Set up environment
 ```bash
 python3 -m venv .venv
 pip install -r requirements.txt
 ```
-
 ### 3. Obtain CPS data
 Download `cps_00006.csv` from [IPUMS CPS](https://cps.ipums.org/cps/) and place it in `data/raw/`.
 
@@ -298,7 +302,6 @@ Download `cps_00006.csv` from [IPUMS CPS](https://cps.ipums.org/cps/) and place 
 ```bash
 python3 notebooks/prepare_panel_for_twfe.py
 ```
-
 ### 5. Run the main DDD analysis
 Open and run `models/SignificanceHolzerStyle.ipynb` — this is the primary analysis notebook containing the main DDD model, placebo tests, and LOO robustness checks.
 
@@ -309,7 +312,6 @@ python3 results/holzer_style_robustness.py
 python3 results/slice_ddd_corrected.py
 python3 results/county_aside_heterogeneity.py
 ```
-
 ## Repository Structure
 
 ```
@@ -354,13 +356,10 @@ Capstone/
 │   └── outputs/                        Generated research outputs
 │
 ```
-
 ## Requirements
-
 ```bash
 pip install -r requirements.txt
 ```
-
 | Package | Purpose |
 |---|---|
 | `pandas` | Data manipulation and filtering |
@@ -374,7 +373,6 @@ pip install -r requirements.txt
 | `jupyter` | Notebook environment |
 
 ---
-
 ## Team
 
 | Name | Role | Contact |
@@ -386,10 +384,11 @@ pip install -r requirements.txt
 *DATA 4382: Data Capstone Project 2 · University of Texas at Arlington · Spring 2026*
 
 ---
-
 ## References
 
-- Holzer, H. J., Hubbard, G., & Strain, M. (2021). Did Pandemic Unemployment Benefits Reduce Employment? Evidence from Early State-Level Expirations in June 2021. *IZA Discussion Paper No. 14927.* [SSRN](https://ssrn.com/abstract=4114431)
-- Coombs, K., Dube, A., Jahnke, C., Kluender, R., Naidu, S., & Stepner, M. (2022). Early Withdrawal of Pandemic Unemployment Insurance: Effects on Employment and Earnings. *AEA Papers and Proceedings, 112*, 85–90.
-- James, G., Witten, D., Hastie, T., & Tibshirani, R. (2021). *An Introduction to Statistical Learning: With Applications in R* (2nd ed.). Springer.
-- Callaway, B. (2023). Difference-in-differences for policy evaluation. *Handbook of Labor, Human Resources and Population Economics*, 1–61.
+- Unemployment Rates During the COVID-19 Pandemic. (2025, October 10). https://www.congress.gov/crs-product/R46554   
+- Holzer, H., Hubbard, R., & Strain, M. (2021). Did Pandemic Unemployment Benefits Reduce Employment? Evidence from Early State-Level Expirations in June 2021. SSRN Electronic Journal.   
+- Coombs, Kyle, Arindrajit Dube, Calvin Jahnke, Raymond Kluender, Suresh Naidu, and Michael Stepner. 2022. "Early Withdrawal of Pandemic Unemployment Insurance: Effects on Employment and Earnings." AEA Papers and Proceedings 112: 85–90.   
+- Callaway, B. (2023). Difference-in-differences for policy evaluation. In Handbook of Labor,  
+Human Resources and Population Economics (pp. 1–61) 15 
+- Unemployment compensation. (2025, February 8). U.S. Department of The Treasury.https://home.treasury.gov/policy-issues/coronavirus/assistance-for-american-families-and workers/unemployment-compensation
