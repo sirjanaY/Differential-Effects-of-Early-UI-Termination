@@ -36,8 +36,8 @@ ___
 
 ## Data
 
-### Primary Dataset — Current Population Survey (CPS) Microdata
-- **Source:** [IPUMS CPS](https://cps.ipums.org/cps/) — nationally representative monthly survey, U.S. Census Bureau
+### Primary Dataset - Current Population Survey (CPS) Microdata
+- **Source:** [IPUMS CPS](https://cps.ipums.org/cps/) - nationally representative monthly survey, U.S. Census Bureau
 - **Type:** Individual-level panel microdata
 - **Raw size:** ~5 million rows, 23 columns
 - **Filtered size:** 348,098 rows → 12,620 after analysis filtering
@@ -60,14 +60,14 @@ ___
 | `DURUNEMP` | Weeks of continuous unemployment |
 | `LNKFW1MWT` | Survey weights - applied in all regressions |
 
-### Secondary Dataset — County Economic Context
+### Secondary Dataset -County Economic Context
 - **Source:** Social, Economic, and Cultural Environment (SECE) data
 - **Coverage:** 3,069 U.S. counties
 - **Features:** Unemployment rate, poverty rate, median household income
 - **Purpose:** County-level supplemental moderation analysis (`results/county_aside_heterogeneity.py`)
 
 ### Policy Data
-- **Source:** Policy Milestones — state-level file tracking UI termination dates
+- **Source:** Policy Milestones- state-level file tracking UI termination dates
 - **Coverage:** All 50 states, March 2020–March 2022
 - **Used to:** Assign `TreatState` and state-specific post timing variables
 
