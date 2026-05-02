@@ -111,17 +111,19 @@ All figures are stored in `images/`.
 US choropleth showing treatment states (orange = ended UI early) vs. control states (blue = kept benefits). 24 treatment states, 27 control states in the main specification.
 
 ### Employment Trends by Wage Group
-![Low Wage vs High Wage After Policy](lowVshigh_afterPolicy.jpg)
+<img src="lowVshigh_afterPolicy.jpg" width="500">
 
 Monthly job-finding rates (Feb–Aug 2021) for low-wage vs. higher-wage workers, split by treatment and control states. A visible divergence emerges after the July policy cutoff — higher-wage workers trend upward while low-wage workers flatten or decline.
 
 ### DDD Result vs. 2018 Placebo
-![DDD vs Placebo](figure_4_ddd_vs_placebo.jpeg)
+<img src="figure_4_ddd_vs_placebo.jpeg" width="500">
+
 
 Side-by-side comparison of the 2021 DDD result (p = 0.035, significant) vs. the 2018 placebo test (p = 0.690, null). Confirms the 2021 effect is driven by the actual policy, not pre-existing trends.
 
 ### DDD Event Study
-![Event Study](figure_6_event_study_DDD.jpeg)
+<img src="figure_6_event_study_DDD.jpeg" width="500">
+
 
 Event study plots for 2018 and 2021 validating the parallel trends assumption. Pre-treatment coefficients cluster near zero (p > 0.10), confirming groups were trending in parallel before the policy.
 
@@ -218,8 +220,8 @@ No hyperparameter tuning was required — the DDD is a fixed identification stra
 
 ### Global Explainability — DDD Forest Plot
 **Notebook:** `notebooks/ddd_forest_plot.ipynb`
+<img src="triple_difference_forest.png" width="500">
 
-![Triple Difference Forest Plot](triple_difference_forest.png)
 
 The forest plot visualizes all 12 robustness specifications simultaneously with 95% confidence intervals. This is the **global explainability layer** of our causal model — it shows how the policy effect behaves across the entire range of modeling choices. Every dot left of zero means the policy hurt low-wage workers relative to higher-wage workers.
 
@@ -231,7 +233,7 @@ The effect is not uniform. It concentrates in prime-age (26–54) workers withou
 ### Parallel Trends Validation
 
 All pre-treatment coefficients cluster near zero (p > 0.10). The divergence begins exactly at the July 2021 cutoff. Three independent placebo tests — 2018, 2019, and a fake May 2021 cutoff — all return null, confirming the 2021 effect is real.
-![](ddd_state_event_study_2018_lowwage_vs_other-wage.png) ![](ddd_state_event_study_2021_lowwage_vs_other-wage.png)
+<img src="ddd_state_event_study_2018_lowwage_vs_other-wage.png" width="500"> <img src="ddd_state_event_study_2021_lowwage_vs_other-wage.png" width="500">
 
 ### County-Level Moderation
 **Script:** `results/county_aside_heterogeneity.py`
@@ -241,8 +243,7 @@ County income, poverty rate, and unemployment rate do not significantly moderate
 ---
 ### Leave-One-Out (LOO) Robustness
 **Output:** `LOO_Robustness_Check.png` 
-
-![LOO Robustness Check](LOO_Robustness_Check.png)
+<img src="LOO_Robustness_Check.png" width="500">
 
 The DDD model was re-estimated 24 times, removing one treatment state at a time. Coefficient range: [−0.066, −0.095]. All p-values remain below 0.05 except Montana and Florida (still below 0.10). No single state drives the result.
 
@@ -269,8 +270,7 @@ This finding is:
 - **Not driven by pre-existing trends** (3 independent placebo tests passed)
 - **Not explained by local economic conditions** (county moderation tests null)
 
-![](compare.png)
-
+<img src="compare.png" width="500">
 
 The policy widened the recovery gap. Reducing income support did not override the structural barriers low-wage workers face.
 
