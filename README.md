@@ -107,7 +107,6 @@ All figures are stored in `images/`.
 ### Treatment Map
 <img src="images/figure_1_treatment_map.png" width="500">
 
-
 US choropleth showing treatment states (orange = ended UI early) vs. control states (blue = kept benefits). 24 treatment states, 27 control states in the main specification.
 
 ### Employment Trends by Wage Group
@@ -118,14 +117,7 @@ Monthly job-finding rates (Feb–Aug 2021) for low-wage vs. higher-wage workers,
 ### DDD Result vs. 2018 Placebo
 <img src="images/figure_4_ddd_vs_placebo.jpeg" width="500">
 
-
 Side-by-side comparison of the 2021 DDD result (p = 0.035, significant) vs. the 2018 placebo test (p = 0.690, null). Confirms the 2021 effect is driven by the actual policy, not pre-existing trends.
-
-### DDD Event Study
-<img src="images/figure_6_event_study_DDD.jpeg" width="500">
-
-
-Event study plots for 2018 and 2021 validating the parallel trends assumption. Pre-treatment coefficients cluster near zero (p > 0.10), confirming groups were trending in parallel before the policy.
 
 ---
 
@@ -151,16 +143,12 @@ TreatState × Post × LowWage + C(STATEFIP) + C(MONTH)
 
 **Key interaction term:** `TreatState × Post × LowWage` captures the differential causal effect — how much worse (or better) low-wage workers did in treatment states after the policy, relative to higher-wage workers and relative to control states.
 
-### Supporting Models
+### Other Models
 
-| Model | Location | Purpose |
-|---|---|---|
-| Low-wage TWFE subgroup | `models/SignificanceHolzerStyle.ipynb` | Isolates direct effect on low-wage workers |
-| Higher-wage TWFE subgroup | `models/SignificanceHolzerStyle.ipynb` | Isolates direct effect on higher-wage workers |
-| Path analysis | `notebooks/path analysis.ipynb` | Direct/indirect causal structure among features |
-| Holzer-style robustness | `results/holzer_style_robustness.py` | Replicates Holzer et al. (2021) comparison |
-| Subgroup DDD slices | `results/slice_ddd_corrected.py` | Age, education, and intersection subgroups |
-| County moderation | `results/county_aside_heterogeneity.py` | Tests whether local conditions moderate the effect |
+Low-wage And High Wage TWFE subgroup | `models/SignificanceHolzerStyle.ipynb` | Isolates direct effect on low-wage workers 
+Holzer-style robustness | `results/holzer_style_robustness.py` | Replicates Holzer et al. (2021) comparison 
+Subgroup DDD slices | `results/slice_ddd_corrected.py` | Age, education, and intersection subgroups 
+County moderation | `results/county_aside_heterogeneity.py` | Tests whether local conditions moderate the effect 
 
 ---
 
@@ -202,42 +190,31 @@ No hyperparameter tuning was required — the DDD is a fixed identification stra
 
 ### Robustness 
 
-| Specification | Coef | p-value | |
-|---|---|---|---|
-| State-specific post timing | −0.049 | 0.013  |
-| Holzer June vs. maintainers | −0.080 | 0.044 | 
-| State linear trends | −0.051 | 0.016 | 
-| Placebo 2018 | +0.023 | 0.686 |  null |
-| Placebo 2019 | +0.049 | 0.385 |  null |
-| Placebo fake May 2021 | +0.026 | 0.526 |  null |
-
-
+The findings are robust, with zero evidence of a significant positive effect in any specification.
 **9 of 12 specifications negative. 6 statistically significant. Zero significant results in the opposite direction.**
 
----
+### DDD Event Study
+<img src="images/figure_6_event_study_DDD.jpeg" width="500">
 
+
+Event study plots for 2018 and 2021 validating the parallel trends assumption. Pre-treatment coefficients cluster near zero (p > 0.10), confirming groups were trending in parallel before the policy.
+
+### Parallel Trends Validation
+
+<img src="images/ddd_state_event_study_2018_lowwage_vs_other-wage.png" width="500">
+<img src="images/ddd_state_event_study_2021_lowwage_vs_other-wage.png" width="500">
+
+All pre-treatment coefficients cluster near zero (p > 0.10). The divergence begins exactly at the July 2021 cutoff. Three independent placebo tests — 2018, 2019, and a fake May 2021 cutoff — all return null, confirming the 2021 effect is real.
+
+---
 ## Model Interpretation (XAI / Global Explainability)
 
 ### Global Explainability: DDD Forest Plot
 **Notebook:** `notebooks/ddd_forest_plot.ipynb`
 
-
 <img src="images/triple_difference_forest.png" width="700">
 
-
 The forest plot visualizes all 12 robustness specifications simultaneously with 95% confidence intervals. This is the **global explainability layer** of our causal model — it shows how the policy effect behaves across the entire range of modeling choices. Every dot left of zero means the policy hurt low-wage workers relative to higher-wage workers.
-
-### Subgroup Heterogeneity
-**Script:** `results/slice_ddd_corrected.py`
-
-The effect is not uniform. It concentrates in prime-age (26–54) workers without college degrees — the exact demographic the policy was intended to motivate back to work. Young (18–24) and older (55+) workers show null results.
-
-### Parallel Trends Validation
-
-All pre-treatment coefficients cluster near zero (p > 0.10). The divergence begins exactly at the July 2021 cutoff. Three independent placebo tests — 2018, 2019, and a fake May 2021 cutoff — all return null, confirming the 2021 effect is real.
-
-<img src="images/ddd_state_event_study_2018_lowwage_vs_other-wage.png" width="500">
-<img src="images/ddd_state_event_study_2021_lowwage_vs_other-wage.png" width="500">
 
 ### County-Level Moderation
 **Script:** `results/county_aside_heterogeneity.py`
@@ -254,7 +231,8 @@ The DDD model was re-estimated 24 times, removing one treatment state at a time.
 
 ## Key Insights
 
-**What worked best:**
+**What worked best and why ?**
+
 - The Triple-Difference design on individual-level CPS microdata outperformed the aggregate TWFE baseline in both statistical power and interpretive clarity
 - State-specific timing — using each state's actual termination date rather than a blanket July indicator — produced the sharpest estimates
 - The subgroup analysis revealed the most policy-relevant finding: prime-age workers without degrees, the exact demographic the policy intended to help, were harmed most
@@ -269,11 +247,6 @@ The DDD model was re-estimated 24 times, removing one treatment state at a time.
 
 The early termination of federal UI benefits in 2021 acted as a blunt instrument that failed to spur relative employment gains for the most vulnerable segment of the workforce. The Triple-Difference estimate of −0.0804 (p = 0.035) confirms a statistically significant negative differential effect.
 
-This finding is:
-- **Directionally consistent** across 9 of 12 robustness specifications
-- **Stable across all 24 treatment states** (LOO analysis)
-- **Not driven by pre-existing trends** (3 independent placebo tests passed)
-- **Not explained by local economic conditions** (county moderation tests null)
 
 <img src="images/compare.png" width="500">
 
@@ -318,53 +291,15 @@ python3 results/slice_ddd_corrected.py
 python3 results/county_aside_heterogeneity.py
 ```
 ## Repository Structure
-
 ```
 Capstone/
-│
-├── README.md                          This file
-├── requirements.txt                    Python dependencies
-├── images/                             FIGURES USED IN README AND REPORTS
-│   ├── UTA-DataScience-Logo.png        Repo header image
-│   ├── est_policy_workerGroup.png      Summary effect figure
-│   ├── figure_1_treatment_map.png      Treatment map
-│   ├── lowVshigh_afterPolicy.jpg       Wage-group trend figure
-│   └── ...
-│
-├── models/                             PRIMARY ANALYSIS NOTEBOOKS
-│   ├── SignificanceHolzerStyle.ipynb   MAIN: DDD model, placebo, LOO
-│   └── baseline_model.ipynb            Baseline TWFE on aggregate data
-│
-├── notebooks/                          SUPPORTING & EXPLORATORY NOTEBOOKS
-│   ├── archives/                       Exploratory history (not active analysis)
-│   ├── EDA.ipynb                       Exploratory data analysis
-│   ├── ddd_forest_plot.ipynb           Global explainability forest plot
-│   ├── path analysis.ipynb             Causal path analysis
-│   ├── finding policy.ipynb            Policy milestone identification
-│   ├── prepare_panel_for_twfe.py       County-level panel construction
-│   ├── SignificanceHolzerStyle.ipynb   
-│   ├── FirstValidTimeFrame.ipynb       Exploratory
-│   ├── Significant.ipynb               Exploratory
-│   └── baseline_model.ipynb           
-│
-├── results/                            SCRIPTS
-│   ├── main_claim_robustness_suite.py  All 12 robustness specifications
-│   ├── holzer_style_robustness.py      Holzer et al. comparison specs
-│   ├── slice_ddd_corrected.py          Subgroup DDD slices
-│   ├── county_aside_heterogeneity.py   County-level moderation tests
-│   ├── build_streamlit_ddd_dataset.py  Builds ddd_inter.json
-│   ├── build_policy_demo_bundle.py     Builds policy_demo_bundle.json
-│   ├── extract_saved_results.py        Exports notebook outputs to Markdown
-│   ├── ddd_inter.json                  Pre-computed DDD results for app
-
-│
-├── images/                             ALL FIGURES AND VISUALIZATIONS
-
-├── data/
-│   ├── raw/                            Raw inputs: CPS, policy, COVID, OxCGRT
-│   ├── processed/                      Processed state-level panel files
-│   └── outputs/                        Generated research outputs
-│
+├── data/              # Raw & processed (CPS, policy, COVID)
+├── images/            # Figures for README and reports
+├── models/            # Core analysis (DDD, TWFE, Placebo tests)
+├── notebooks/         # EDA, Causal paths, and Forest plots
+├── results/           # Scripts for robustness & subgroup tests
+├── requirements.txt   # Python dependencies
+└── archives/          # Old exploratory history
 ```
 ## Requirements
 ```bash
