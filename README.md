@@ -221,6 +221,7 @@ No hyperparameter tuning was required — the DDD is a fixed identification stra
 ### Global Explainability: DDD Forest Plot
 **Notebook:** `notebooks/ddd_forest_plot.ipynb`
 
+
 <img src="images/triple_difference_forest.png" width="700">
 
 
