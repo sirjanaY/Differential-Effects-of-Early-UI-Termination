@@ -240,6 +240,7 @@ The effect is not uniform. It concentrates in prime-age (26–54) workers withou
 ### Parallel Trends Validation
 
 All pre-treatment coefficients cluster near zero (p > 0.10). The divergence begins exactly at the July 2021 cutoff. Three independent placebo tests — 2018, 2019, and a fake May 2021 cutoff — all return null, confirming the 2021 effect is real.
+![](ddd_state_event_study_2018_lowwage_vs_other-wage.png) ![](ddd_state_event_study_2021_lowwage_vs_other-wage.png)
 
 ### County-Level Moderation
 **Script:** `results/county_aside_heterogeneity.py`
@@ -270,6 +271,9 @@ This finding is:
 - **Stable across all 24 treatment states** (LOO analysis)
 - **Not driven by pre-existing trends** (3 independent placebo tests passed)
 - **Not explained by local economic conditions** (county moderation tests null)
+
+![](compare.png)
+
 
 The policy widened the recovery gap. Reducing income support did not override the structural barriers low-wage workers face.
 
