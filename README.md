@@ -9,17 +9,17 @@
 
 ---
 
-## Business Problem / Motivation
+## Problem Definition
 
 In July 2021, 26 U.S. states terminated federal pandemic Unemployment Insurance (UI) benefits months ahead of the national September expiration. The stated rationale was simple: removing the financial safety net would push unemployed workers back into the labor market faster.
 
-But the evidence tells a different story — at least for the workers who needed help most.
-
+## But the evidence tells a different story at least for the workers who needed help most.
 Low-wage workers in food service, retail, and other vulnerable industries face structural barriers that go far beyond financial disincentives: lack of childcare, limited transportation, persistent health concerns, and localized demand shocks. If policymakers cut benefits without accounting for these barriers, the most vulnerable group could be harmed rather than helped.
 
 **This project formally tests that hypothesis using individual-level causal inference methods.** No prior analysis had formally tested whether the policy's effect differed between low-wage and higher-wage workers. We fill that gap.
 
 ---
+___
 
 ![Policy Effect by Worker Group](est_policy_workerGroup.png)
 
