@@ -19,8 +19,6 @@ Low-wage workers in food service, retail, and other vulnerable industries face s
 **This project formally tests that hypothesis using individual-level causal inference methods.** No prior analysis had formally tested whether the policy's effect differed between low-wage and higher-wage workers. We fill that gap.
 
 ---
-![](UTA-DataScience-Logo.png)
-
 ![](est_policy_workerGroup.png)
 
 ## Project Overview
@@ -90,11 +88,6 @@ Low-wage workers in food service, retail, and other vulnerable industries face s
 | `found_job` | Binary outcome: 1 = employed, 0 = not employed |
 | `ended_policy_early` | State-level indicator merged from Policy Milestones CSV |
 
-### Handling Missing Values
-- Removed rows with missing `EMPSTAT`, `STATEFIP`, or `MONTH`
-- Dropped observations with unknown `DURUNEMP` codes
-- County merge: rows without a FIPS match excluded from supplemental analysis only
-
 ### Panel Construction
 Run `prepare_panel_for_twfe.py` to construct the county-level TWFE panel from raw inputs.
 
@@ -104,22 +97,25 @@ Run `prepare_panel_for_twfe.py` to construct the county-level TWFE panel from ra
 
 All EDA figures are in `notebooks/` as SVG files.
 
-### Figure 1 — Treatment Map (`figure_1_treatment_map.svg`)
+### Figure 1 — Treatment Map 
+![](figure_1_treatment_map.png)
+
 US choropleth showing treatment states (orange = ended UI early) vs. control states (blue = kept benefits). 24 treatment states, 27 control states in the main specification.
 
-### Figure 1 — Employment Trends Poster (`figure_1_trends_poster.svg`)
+###  Employment Trends Poster 
+![](lowVshigh_afterPolicy.png)
+
 Monthly job-finding rates (Feb–Aug 2021) for low-wage vs. higher-wage workers, split by treatment and control states. A visible divergence emerges after the July policy cutoff.
 
-### Figure 2 — Methodology Flowchart (`figure_2_methodology_flowchart.svg`)
-5-step pipeline: Data Ingestion → Data Engineering → Causal Model → Validation → Conclusive Finding.
+### Figure 4 — DDD vs. Placebo
+![](figure_4_ddd_vs_placebo.png)
 
-### Figure 4 — DDD vs. Placebo (`figure_4_ddd_vs_placebo.svg`)
 Side-by-side comparison of the 2021 DDD result (p = 0.035, significant) vs. the 2018 placebo test (p = 0.690, null). Confirms the 2021 effect is driven by the actual policy, not pre-existing trends.
 
-### Figure 4 — The Gap (`figure_4_the_gap.svg`)
-Bar chart showing the differential effect by group: DDD (−7.5%), Low-Wage DiD (−2.4%), Other-Wage DiD (+4.16%). Visualizes the 8-percentage-point recovery gap between wage groups.
 
 ### Figure 6 — DDD Event Studies (`figure_6_event_study_DDD_State_*.svg`)
+![](figure_6_event_study_DDD.png)
+
 Event study plots for 2018 and 2021 validating the parallel trends assumption. Pre-treatment coefficients cluster near zero (p > 0.10), confirming groups were trending in parallel before the policy.
 
 ---
@@ -143,8 +139,6 @@ The DDD is the gold standard for testing *heterogeneous* policy effects across s
 ```
 found_job ~ TreatState × Post × LowWage + C(STATEFIP) + C(MONTH)
 ```
-Estimated via WLS with survey weights (`LNKFW1MWT`). Standard errors clustered at the state level.
-
 **Key interaction term:** `TreatState × Post × LowWage` captures the differential causal effect — how much worse (or better) low-wage workers did in treatment states after the policy, relative to higher-wage workers and relative to control states.
 
 ### Supporting Models
@@ -172,8 +166,6 @@ Estimated via WLS with survey weights (`LNKFW1MWT`). Standard errors clustered a
 
 No hyperparameter tuning required — the DDD is a fixed identification strategy, not a predictive model.
 
----
-
 ## Results
 
 ### Main DDD Result
@@ -182,7 +174,7 @@ No hyperparameter tuning required — the DDD is a fixed identification strategy
 |---|---|---|---|
 | `TreatState × Post × LowWage` | **−0.0804** | **0.035** | Low-wage workers in treatment states saw 8% worse job-finding post-policy relative to higher-wage peers |
 | `TreatState × Post` (Higher-Wage) | +0.0472 | 0.052 | Higher-wage workers saw a marginal employment gain |
-| `TreatState × Post` (Low-Wage) | −0.0240 | 0.470 | No significant direct effect on low-wage workers alone |
+| `TreatState × Post` (Low-Wage) | −0.08 | 0.470 | No significant direct effect on low-wage workers alone |
 
 ### Subgroup DDD Slices
 
@@ -197,23 +189,11 @@ No hyperparameter tuning required — the DDD is a fixed identification strategy
 
 ### Robustness Suite (`scripts/main_claim_robustness_suite.py`)
 
-| Specification | Coefficient | p-value | Status |
-|---|---|---|---|
-| Adjacent transition filter | −0.075 | 0.054 | ✓ Borderline |
-| State-specific post timing | −0.049 | 0.013 | ✓✓ Significant |
-| Holzer June vs. maintainers | −0.080 | 0.044 | ✓✓ Significant |
-| Stacked cohort proxy | −0.023 | 0.806 | ⚠ Null (method mismatch — near-simultaneous adoption) |
-| State linear trends | −0.051 | 0.016 | ✓✓ Significant |
-| Industry proxy (main) | −0.049 | 0.013 | ✓✓ Significant |
-| Industry proxy alt | −0.020 | 0.336 | ⚠ Definition-sensitive boundary |
-| Randomization inference | −0.049 | RI p=0.653 | ⚠ Underpowered at 24 states |
-| Placebo 2018 | +0.023 | 0.686 | ✓ Null as expected |
-| Placebo 2019 | +0.049 | 0.385 | ✓ Null as expected |
-| Placebo fake May 2021 | +0.026 | 0.526 | ✓ Null as expected |
+![](est_policy_workerGroup.png)
+
 
 **9 of 12 specifications negative. 6 statistically significant. Zero significant results in the opposite direction.**
 
----
 
 ## Model Interpretation (XAI / Global Explainability)
 
@@ -221,11 +201,13 @@ See the [`xai/`](./xai/) folder for all explainability outputs and a full explan
 
 ### Global Explainability — DDD Forest Plot
 `notebooks/ddd_forest_plot.ipynb` · Output: `xai/forest_plot_ddd.png`
+![](triple_difference_forest.png)
 
 The forest plot visualizes all 12 robustness specifications simultaneously with 95% confidence intervals. This is our **global explainability layer** — it shows how the policy effect behaves across the entire range of modeling choices. Every dot left of zero means the policy hurt low-wage workers.
 
 ### Leave-One-Out (LOO) Analysis
 `notebooks/LOO_Robustness_Check.png` · Reproduced in `xai/loo_forest_plot.png`
+![](LOO_Robustness_Check.png)
 
 The DDD model was re-estimated 24 times, removing one treatment state at a time. Coefficient range: [−0.066, −0.095]. All p-values remain below 0.05 except Montana and Florida (still below 0.10). No single state drives the result.
 
